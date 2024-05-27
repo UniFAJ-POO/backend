@@ -3,47 +3,53 @@ package com.unifaj.restaurant.backend;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "CLIENTE")
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String nome;
-    private String cpf;
+    @Column(name = "ID_CLIENTE")
+    private Integer idCliente;
+
+    @Column(name = "NOME_CLIENTE", nullable = false, length = 60)
+    private String nomeCliente;
+
+    @Column(name = "CPF_CLIENTE", nullable = false, length = 11, unique = true)
+    private String cpfCliente;
 
     // Constructor.
 
     public Cliente() {
     }
 
-    public Cliente(int id, String nome, String cpf) {
-        this.id = id;
-        this.nome = nome;
-        this.cpf = cpf;
+    public Cliente(Integer idCliente, String nomeCliente, String cpfCliente) {
+        this.idCliente = idCliente;
+        this.nomeCliente = nomeCliente;
+        this.cpfCliente = cpfCliente;
     }
 
     // Getters e Setters.
 
-    public int getId() {
-        return id;
+    public Integer getIdCliente() {
+        return idCliente;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdCliente(Integer idCliente) {
+        this.idCliente = idCliente;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeCliente() {
+        return nomeCliente;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getCpfCliente() {
+        return cpfCliente;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setCpfCliente(String cpfCliente) {
+        this.cpfCliente = cpfCliente;
     }
 }

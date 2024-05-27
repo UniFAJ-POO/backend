@@ -2,56 +2,81 @@ package com.unifaj.restaurant.backend;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 @Entity
+@Table(name = "PEDIDO")
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "ID_PEDIDO")
+    private Integer idPedido;
+
+    @Column(name = "TOTAL_PEDIDO", nullable = false)
+    private BigDecimal totalPedido;
+
+    @Column(name = "STATUS_PAGO", nullable = false)
+    private Boolean statusPago;
+
+    @Column(name = "DATA_PEDIDO", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dataPedido;
 
     @ManyToOne
-    private Cliente cliente;
-
-    @ManyToOne
+    @JoinColumn(name = "NUM_MESA")
     private Mesa mesa;
 
-    @OneToMany(mappedBy = "pedido")
-    private List<Item> itens;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date data;
+    @ManyToOne
+    @JoinColumn(name = "ID_CLIENTE", nullable = false)
+    private Cliente cliente;
 
     // Constructor.
 
     public Pedido() {
     }
 
-    public Pedido(int id, Cliente cliente, Mesa mesa, List<Item> itens, Date data) {
-        this.id = id;
-        this.cliente = cliente;
+    public Pedido(Integer idPedido, BigDecimal totalPedido, Boolean statusPago, Date dataPedido, Mesa mesa, Cliente cliente) {
+        this.idPedido = idPedido;
+        this.totalPedido = totalPedido;
+        this.statusPago = statusPago;
+        this.dataPedido = dataPedido;
         this.mesa = mesa;
-        this.itens = itens;
-        this.data = data;
+        this.cliente = cliente;
     }
 
     // Getters e Setters.
 
-    public int getId() {
-        return id;
+    public Integer getIdPedido() {
+        return idPedido;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdPedido(Integer idPedido) {
+        this.idPedido = idPedido;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public BigDecimal getTotalPedido() {
+        return totalPedido;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setTotalPedido(BigDecimal totalPedido) {
+        this.totalPedido = totalPedido;
+    }
+
+    public Boolean getStatusPago() {
+        return statusPago;
+    }
+
+    public void setStatusPago(Boolean statusPago) {
+        this.statusPago = statusPago;
+    }
+
+    public Date getDataPedido() {
+        return dataPedido;
+    }
+
+    public void setDataPedido(Date dataPedido) {
+        this.dataPedido = dataPedido;
     }
 
     public Mesa getMesa() {
@@ -62,19 +87,11 @@ public class Pedido {
         this.mesa = mesa;
     }
 
-    public List<Item> getItens() {
-        return itens;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setItens(List<Item> itens) {
-        this.itens = itens;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

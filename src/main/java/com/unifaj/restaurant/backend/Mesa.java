@@ -2,70 +2,54 @@ package com.unifaj.restaurant.backend;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 @Entity
+@Table(name = "MESA")
 public class Mesa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private int cadeiras;
+    @Column(name = "NUM_MESA")
+    private Integer numMesa;
 
-    @Enumerated(EnumType.STRING)
-    private Situacao situacao;
+    @Column(name = "QTD_CADEIRA", nullable = false)
+    private Integer qtdCadeira;
 
-    @OneToMany(mappedBy = "mesa")
-    private List<Pedido> pedidos;
-
-    public enum Situacao {
-        OCUPADA,
-        LIVRE,
-        RESERVADA
-    }
+    @Column(name = "STATUS_MESA", nullable = false)
+    private Boolean statusMesa;
 
     // Constructor.
 
     public Mesa() {
     }
 
-    public Mesa(int id, int cadeiras, Situacao situacao, List<Pedido> pedidos) {
-        this.id = id;
-        this.cadeiras = cadeiras;
-        this.situacao = situacao;
-        this.pedidos = pedidos;
+    public Mesa(Integer numMesa, Integer qtdCadeira, Boolean statusMesa) {
+        this.numMesa = numMesa;
+        this.qtdCadeira = qtdCadeira;
+        this.statusMesa = statusMesa;
     }
 
     // Getters e Setters.
 
-    public int getId() {
-        return id;
+    public Integer getNumMesa() {
+        return numMesa;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNumMesa(Integer numMesa) {
+        this.numMesa = numMesa;
     }
 
-    public int getCadeiras() {
-        return cadeiras;
+    public Integer getQtdCadeira() {
+        return qtdCadeira;
     }
 
-    public void setCadeiras(int cadeiras) {
-        this.cadeiras = cadeiras;
+    public void setQtdCadeira(Integer qtdCadeira) {
+        this.qtdCadeira = qtdCadeira;
     }
 
-    public Situacao getSituacao() {
-        return situacao;
+    public Boolean getStatusMesa() {
+        return statusMesa;
     }
 
-    public void setSituacao(Situacao situacao) {
-        this.situacao = situacao;
-    }
-
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
+    public void setStatusMesa(Boolean statusMesa) {
+        this.statusMesa = statusMesa;
     }
 }
