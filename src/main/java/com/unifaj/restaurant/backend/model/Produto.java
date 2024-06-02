@@ -1,4 +1,4 @@
-package com.unifaj.restaurant.backend;
+package com.unifaj.restaurant.backend.model;
 
 import jakarta.persistence.*;
 
